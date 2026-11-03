@@ -4,7 +4,7 @@ public class Main {
         CalculadoraDomicilio calculadora = new CalculadoraDomicilio();
         AppRepartidor repartidor = new AppRepartidor();
 
-        System.out.println("=== Domicilios Rapidito: tarde lluviosa en Bogota ===");
+        System.out.println("=== Domicilios Rappi: tarde lluviosa en Bogota ===");
         admin.activarModoLluvia(2000);
 
         double precio = calculadora.calcular(3);
