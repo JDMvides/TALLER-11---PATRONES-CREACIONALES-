@@ -1,0 +1,66 @@
+# Eliminar credenciales de Git (Windows · CMD)
+
+Úselo al terminar de trabajar en un computador compartido (salas de la universidad).
+
+## 1. Ver las credenciales guardadas
+
+```cmd
+cmdkey /list | findstr git
+```
+
+## 2. Borrar la credencial de GitHub
+
+```cmd
+cmdkey /delete:git:https://github.com
+```
+
+> Si en el paso 1 aparece con otro nombre (por ejemplo `git:https://usuario@github.com`),
+> copie ese nombre exacto después de `/delete:`.
+
+Alternativa usando Git:
+
+```cmd
+(echo protocol=https& echo host=github.com) | git credential reject
+```
+
+## 3. Quitar nombre y correo
+
+```cmd
+git config --global --unset user.name
+git config --global --unset user.email
+```
+
+## 4. (Opcional) Evitar que Git vuelva a guardar credenciales
+
+```cmd
+git config --global --unset credential.helper
+```
+
+## 5. Cambiar la URL del repositorio remoto
+
+Desde la carpeta del proyecto, vea a qué repositorio apunta:
+
+```cmd
+git remote -v
+```
+
+Cámbiela por la de su propio repositorio:
+
+```cmd
+git remote set-url origin https://github.com/SU_USUARIO/SU_REPOSITORIO.git
+```
+
+> Si el proyecto no tiene remoto (`git remote -v` no muestra nada), agréguelo con
+> `git remote add origin https://github.com/SU_USUARIO/SU_REPOSITORIO.git`
+
+## 6. Verificar
+
+```cmd
+git config --global --list
+cmdkey /list | findstr git
+git remote -v
+```
+
+No debe aparecer el usuario ni el correo anterior, y `origin` debe apuntar al repositorio correcto.
+El próximo `git push` pedirá iniciar sesión de nuevo.
+Explicar
