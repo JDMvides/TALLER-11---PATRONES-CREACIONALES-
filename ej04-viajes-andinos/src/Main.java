@@ -2,25 +2,39 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== Viajes Andinos: paquetes vendidos ===");
 
-        PaqueteViaje p1 = new PaqueteViaje("Cartagena", 4, true, "Decameron",
-                                           true, "Islas del Rosario", false);
+        PaqueteViaje p1 = PaqueteViaje.builder()
+            .destino("Cartagena").noches(4).vuelo(true).hotel("Decameron")
+            .desayuno(true).tour("Islas del Rosario").build();
 
-        // Solo hotel + seguro, sin vuelo ni desayuno ni tour... cual constructor uso?
-        PaqueteViaje p2 = new PaqueteViaje("Villa de Leyva", 2, false, "Posada del Sol",
-                                           false, null, true);
+        // Solo hotel + seguro, sin vuelo ni desayuno ni tour
+        PaqueteViaje p2 = PaqueteViaje.builder()
+            .destino("Villa de Leyva").noches(2).hotel("Posada del Sol")
+            .seguroViaje(true).build();
 
-        // El asesor uso setters y se le olvido el destino
-        PaqueteViaje p3 = new PaqueteViaje();
-        p3.setNoches(3);
-        p3.setTour("Cafe en Salento");
+        // El asesor olvido el destino
+        PaqueteViaje p3 = null;
+        try {
+            p3 = PaqueteViaje.builder().noches(3).tour("Cafe en Salento").build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Pedido 3 RECHAZADO: " + e.getMessage());
+        }
 
         // Otro asesor digito 0 noches
-        PaqueteViaje p4 = new PaqueteViaje("San Andres", 0);
+        PaqueteViaje p4 = null;
+        try {
+            p4 = PaqueteViaje.builder().destino("San Andres").noches(0).build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Pedido 4 RECHAZADO: " + e.getMessage());
+        }
 
         System.out.println(p1);
         System.out.println(p2);
-        System.out.println(p3);
-        System.out.println(p4);
+        if (p3 != null) {
+            System.out.println(p3);
+        }
+        if (p4 != null) {
+            System.out.println(p4);
+        }
 
         System.out.println();
         System.out.println("ESPERADO -> p1 y p2 se construyen leyendo claramente que incluyen,");
