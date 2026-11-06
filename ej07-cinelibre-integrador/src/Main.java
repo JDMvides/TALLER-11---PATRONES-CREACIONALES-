@@ -6,13 +6,16 @@ public class Main {
         System.out.println("=== CineLibre: estreno, funcion 7:00 p.m., sala 1 ===");
 
         // Boleta 3D, silla VIP, combo nachos, sin descuento
-        taquilla.vender(new Boleta("Amazonas Perdido", "F7", true, true, "nachos", false));
+        taquilla.vender(Boleta.builder("Amazonas Perdido", "F7")
+            .es3D(true).sillaVip(true).combo("nachos").build());
 
         // Boleta 2D, silla normal, sin combo, CON descuento estudiante
-        app.comprar(new Boleta("Amazonas Perdido", "F8", false, true, null, false));
+        app.comprar(Boleta.builder("Amazonas Perdido", "F8")
+            .estudiante(true).build());
 
         // Alguien compra por la app la misma silla que ya vendio la taquilla
-        app.comprar(new Boleta("Amazonas Perdido", "F7", false, false, "crispetas", false));
+        app.comprar(Boleta.builder("Amazonas Perdido", "F7")
+            .combo("crispetas").build());
 
         System.out.println();
         System.out.println("ESPERADO -> la boleta F8 sale con tarifa estudiante y sin VIP,");

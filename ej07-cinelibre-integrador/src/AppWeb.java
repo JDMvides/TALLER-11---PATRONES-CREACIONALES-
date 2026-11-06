@@ -1,6 +1,6 @@
 public class AppWeb {
 
-    private MapaSillas mapa = new MapaSillas();
+    private final MapaSillas mapa = MapaSillas.getInstancia();
 
     public void comprar(Boleta boleta) {
         if (mapa.reservar(boleta.getSilla())) {

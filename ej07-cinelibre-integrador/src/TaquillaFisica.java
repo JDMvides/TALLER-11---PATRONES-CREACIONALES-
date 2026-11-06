@@ -1,6 +1,6 @@
 public class TaquillaFisica {
 
-    private MapaSillas mapa = new MapaSillas();
+    private final MapaSillas mapa = MapaSillas.getInstancia();
 
     public void vender(Boleta boleta) {
         if (mapa.reservar(boleta.getSilla())) {

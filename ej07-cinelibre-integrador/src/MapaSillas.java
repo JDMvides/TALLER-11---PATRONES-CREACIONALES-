@@ -1,14 +1,19 @@
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MapaSillas {
 
-    private ArrayList<String> ocupadas = new ArrayList<>();
+    private static final MapaSillas INSTANCIA = new MapaSillas();
 
-    public boolean reservar(String silla) {
-        if (ocupadas.contains(silla)) {
-            return false;
-        }
-        ocupadas.add(silla);
-        return true;
+    private final Set<String> ocupadas = new HashSet<>();
+
+    private MapaSillas() { }
+
+    public static MapaSillas getInstancia() {
+        return INSTANCIA;
+    }
+
+    public synchronized boolean reservar(String silla) {
+        return ocupadas.add(silla);
     }
 }
