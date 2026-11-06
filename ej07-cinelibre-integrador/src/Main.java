@@ -22,3 +22,4 @@ public class Main {
         System.out.println("            y la segunda venta de F7 debe ser RECHAZADA");
     }
 }
+//..
